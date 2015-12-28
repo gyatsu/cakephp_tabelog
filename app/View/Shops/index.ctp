@@ -1,3 +1,8 @@
+<div style="float:right;">
+ <?=$this->Html->Link('レストラン登録',
+    array('controller' => 'shops' , 'action' => 'add')
+ )?>
+</div>
 <h2>レストラン一覧</h2>
 <?=$this->Session->flash('auth')?>
 <?php foreach ($list as $data) : ?>
@@ -13,3 +18,10 @@
     </tr>
     </table>
 <?php endforeach; ?>
+<div style="text-align:center;">
+<?php
+  echo $this->Paginator->prev('< 前へ');
+  echo $this->Paginator->numbers();
+  echo $this->Paginator->next('次へ >');
+?>
+</div>

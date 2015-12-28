@@ -5,6 +5,10 @@ class ShopsController extends AppController
     // var $scaffold;
     public $uses = array('Shop', 'Review');
 
+    public $helpers = array('Paginator');
+
+    public $components = array('Paginator');
+
     public function beforeFilter ()
   {
         parent::beforeFilter();
@@ -12,8 +16,15 @@ class ShopsController extends AppController
 
     public function index ()
     {
-$this->log($this->Shop->find('all'));
-        $this->set('list', $this->Shop->find('all'));
+        $this->Paginator->settings = array(
+            'limit' => 5,
+            'order' => array('created' => 'desc'),
+            'recursive' => 3
+        );
+
+// $this->log($this->Shop->find('all'));
+        // $this->set('list', $this->Shop->find('all'));
+        $this->set('list', $this->paginate());
     }
 
     public function view ($id)
