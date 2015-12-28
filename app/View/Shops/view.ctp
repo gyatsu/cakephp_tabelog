@@ -78,3 +78,8 @@
           ));?>
   </span>
 </div>
+<hr>
+<?php if ($user) : ?>
+  ようこそ<?=$user['email']?>さん<br>
+  口コミ<?=$myReviewCnt?>件
+<?php endif ; ?>
