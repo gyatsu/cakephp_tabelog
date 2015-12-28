@@ -2,8 +2,37 @@
 
 class ReviewsController extends AppController
 {
+    public function beforeFilter ()
+    {
+        parent::beforeFilter();
+        $this->Auth->deny('edit');
+    }
     public function edit ($shopId = null)
     {
+        if ($this->request->is('post'))
+        {
+            $request = $this->request->data['Review'];
+
+            $data = array(
+                'user_id' => $this->user['id'],
+                'shop_id' => $request['shop_id'],
+                'title' => $request['title'],
+                'body' => $request['body'],
+                'score' => $request['score']
+            );
+
+            if (!empty($request['id']))
+            {
+                $data['id'] = $request['id'];
+            }
+
+            $this->Review->save($data);
+
+            $this->redirect(array(
+                'controller' => 'shops', 'action' => 'view', $request['shop_id']
+            ));
+        }
+
         $review = $this->Review->getData($shopId, $this->user['id']);
 
         $id = !empty($review['Review']['id']) ? $review['Review']['id'] : 0;
