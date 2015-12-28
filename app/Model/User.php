@@ -26,6 +26,7 @@ class User extends AppModel
   {
       if ($field['passwd'] === $this->data['User'][$colum])
       {
+          $this->data['User']['passwd'] = Authcomponent::password($field['passwd']);
           return true;
       }
   }

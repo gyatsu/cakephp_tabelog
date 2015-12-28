@@ -1,4 +1,5 @@
 <h2>ログイン</h2>
+  <?=$this->Session->flash('auth')?>
   <?=$this->Form->create('User', array('action' => 'login'));?>
   <?=$this->Form->input('email', array(
     array('label' => 'メールアドレス', 'type' => 'email')
