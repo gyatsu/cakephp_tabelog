@@ -43,4 +43,13 @@ class UsersController extends AppController
             }
        }
   }
+
+  public function logout ()
+  {
+    $this->Auth->logout();
+    $this->Session->setFlash('ログアウトしました', 'default', array(), 'auth');
+    return $this->redirect($this->Auth->redirect());
+
+
+  }
 }
