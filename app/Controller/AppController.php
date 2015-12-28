@@ -31,5 +31,25 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    public $components = array('DebugKit.Toolbar');
+    public $components = array('DebugKit.Toolbar', 'Auth');
+
+    public $isLogin = false;
+    public $user = array();
+    public $uses = array('User');
+
+    public function beforefilter ()
+    {
+        $this->isLogin = (bool)$this->Auth->user();
+        $user = $this->Auth->user();
+        if (!empty($user['email']))
+        {
+            $user = $this->User->findByEmail($user['email']);
+            $this->user = $user['User'];
+
+        }
+
+        $this->set('isLogin', $this->isLogin);
+        $this->set('user', $this->user);
+        $this->Auth->allow();
+    }
 }

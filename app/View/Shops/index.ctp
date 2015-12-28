@@ -1,4 +1,5 @@
 <h2>レストラン一覧</h2>
+<?=$this->Session->flash('auth')?>
 <?php foreach ($list as $data) : ?>
   <table style="border:solid 1px #000;">
     <tr>

@@ -3,6 +3,11 @@
 class ShopsController extends AppController
 {
     // var $scaffold;
+    public function beforeFilter ()
+  {
+        parent::beforeFilter();
+  }
+
     public function index ()
     {
 $this->log($this->Shop->find('all'));
@@ -11,7 +16,7 @@ $this->log($this->Shop->find('all'));
 
     public function view ($id)
     {
-    $this->set('data', $this->Shop->findById($id));
+        $this->set('data', $this->Shop->findById($id));
     }
     public function add ()
     {
