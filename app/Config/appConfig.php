@@ -1,6 +1,6 @@
 <?php
 
-$config['scorelist'] = array(
+$config['scoreList'] = array(
     1 => '★☆☆☆☆',
     2 => '★★☆☆☆',
     3 => '★★★☆☆',
