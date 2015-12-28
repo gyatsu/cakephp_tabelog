@@ -21,6 +21,7 @@ class UsersController extends AppController
   public function beforeFilter ()
   {
      parent::beforeFilter();
+     $this->Auth->deny('edit');
   }
 
   public function add ()
@@ -42,6 +43,11 @@ class UsersController extends AppController
                 return $this->redirect($this->Auth->redirect());
             }
        }
+  }
+
+  public function edit ()
+  {
+
   }
 
   public function login ()
