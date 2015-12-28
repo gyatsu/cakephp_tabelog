@@ -31,7 +31,7 @@ class Review extends AppModel
     public function getReviewCnt ($userId)
     {
         $options = array(
-            'condition' = array(
+            'condition' => array(
                 'user_id' => $userId
             )
         );

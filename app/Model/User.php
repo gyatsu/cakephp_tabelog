@@ -4,7 +4,7 @@ class User extends AppModel
 {
   public $hasMany = array(
       'Review' => array(
-          'className' => Review
+          'className' => 'Review'
       )
   );
 
