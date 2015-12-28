@@ -20,8 +20,19 @@ $this->log($this->Shop->find('all'));
     {
         $userId = !empty($this->user['id']) ? $this->user['id'] : 0;
         $this->set('isEdit', $this->Review->isReview($id, $userId));
+
+        if ($this->isLogin) {
+            $this->set('myReviewCnt', $this->Review->getReviewCnt($this->user['id']));
+        }
+
+        list($score, $scoreAve) = $this->Review->getScoreAvg($id);
+        $this->set('scoreAve', $scoreAve);
+        $this->set('score', $score);
+        $this->set('scoreList', Configure::read('scoreList'));
+        $this->set('reviewList', $this->Review->getListByShopId($id));
         $this->set('data', $this->Shop->findById($id));
     }
+
     public function add ()
     {
         if ($this->request->is('post'))

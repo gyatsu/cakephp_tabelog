@@ -64,7 +64,7 @@ class Review extends AppModel
         $score = $scoreAve = 0;
         if (!empty($data[0]['avg'])) {
             $score = round($data[0]['avg']);
-            $scoreAve = round($data[0]['ave'], 1);
+            $scoreAve = round($data[0]['avg'], 1);
         }
 
         return array($score, $scoreAve);
