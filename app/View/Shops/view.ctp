@@ -2,9 +2,22 @@
   <span style="float:left;"><h2><?=$data['Shop']['name']?></h2></span>
   <span style="float:right;"><h3><?=$data['Shop']['tel']?></h3></span>
 </div>
-  <?=$this->Html->link('レビューを作成する', array(
+  <?php if ($isLogin) : ?>
+    <?php
+     if ($isEdit) :
+      $str = '編集';
+    else :
+      $str = '作成';
+    endif;
+    ?>
+  <?=$this->Html->link('レビューを' . $str. 'する', array(
     'controller' => 'reviews', 'action' => 'edit', $data['Shop']['id']
     ));?>
+  <?php else :?>
+    <?=$this->Html->link('ユーザー登録してレビューを投稿', array(
+        'controller' => 'users', 'action' => 'add'
+    ))?>
+  <?php endif; ?>
 <div>
   <span>店舗情報</span>
   <table>

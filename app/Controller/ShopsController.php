@@ -16,6 +16,7 @@ $this->log($this->Shop->find('all'));
 
     public function view ($id)
     {
+        $this->set('isEdit', false);
         $this->set('data', $this->Shop->findById($id));
     }
     public function add ()
