@@ -111,3 +111,4 @@ CakeLog::config('error', array(
 ));
 
 CakePlugin::load(array('Migrations', 'DebugKit'));
+Configure::load('appConfig.php');
