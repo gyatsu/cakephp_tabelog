@@ -18,4 +18,10 @@ class Shop extends AppModel
             'message' => '形式が正しくありません'
             )
         );
+    public $hasMany = array(
+        'Review' => array(
+            'className' => 'Review',
+            'order' => 'Review.created DESC'
+        )
+    );
 }

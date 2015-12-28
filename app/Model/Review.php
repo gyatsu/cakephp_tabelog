@@ -27,4 +27,46 @@ class Review extends AppModel
         );
         return $this->find('first', $options);
     }
+
+    public function getReviewCnt ($userId)
+    {
+        $options = array(
+            'condition' = array(
+                'user_id' => $userId
+            )
+        );
+
+        return $this->find('count', $options);
+    }
+
+    public function getListByShopId ($shopId)
+    {
+        $options = array(
+            'field' =>
+            array('Review.id', 'Review.user_id', 'Review.title', 'Review.body', 'Review.score', 'Review.created', 'User.email', 'User.id'),
+            'conditions' =>
+            array('Review.shop_id' => $shopId),
+            'recursive' => 2
+        );
+        return $this->find('all', $options);
+    }
+
+    public function getScoreAvg ($shopId)
+    {
+        $options = array(
+            'fields' => 'AVG(score) as avg',
+            'conditions' => array('shop_id' => $shopId),
+            'group' => array('shop_id')
+        );
+
+        $data = $this->find('first', $options);
+
+        $score = $scoreAve = 0;
+        if (!empty($data[0]['avg'])) {
+            $score = round($data[0]['avg']);
+            $scoreAve = round($data[0]['ave'], 1);
+        }
+
+        return array($score, $scoreAve);
+    }
 }

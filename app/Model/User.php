@@ -2,6 +2,11 @@
 
 class User extends AppModel
 {
+  public $hasMany = array(
+      'Review' => array(
+          'className' => Review
+      )
+  );
 
   public $validate = array(
       'email' => array(
