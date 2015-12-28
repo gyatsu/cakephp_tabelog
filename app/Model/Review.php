@@ -11,6 +11,12 @@ class Review extends AppModel
         )
     );
 
+    public function isReview ($shopId, $userId)
+    {
+        $review = $this->getData($shopId, $userId);
+        return !empty($review) ? true : false;
+    }
+
     public function getData ($shopId, $userId)
     {
         $options = array(

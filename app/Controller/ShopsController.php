@@ -3,6 +3,8 @@
 class ShopsController extends AppController
 {
     // var $scaffold;
+    public $uses = array('Shop', 'Review');
+
     public function beforeFilter ()
   {
         parent::beforeFilter();
@@ -16,7 +18,8 @@ $this->log($this->Shop->find('all'));
 
     public function view ($id)
     {
-        $this->set('isEdit', false);
+        $userId = !empty($this->user['id']) ? $this->user['id'] : 0;
+        $this->set('isEdit', $this->Review->isReview($id, $userId));
         $this->set('data', $this->Shop->findById($id));
     }
     public function add ()
