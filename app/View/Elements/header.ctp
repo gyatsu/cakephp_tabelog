@@ -16,4 +16,12 @@
   <?php if (!$isLogin) : ?>
     <span style="float:right;margin:auto 10px;"><?=$this->Html->link('新規登録', array('controller' => 'users', 'action' => 'add'));?></span>
   <?php endif; ?>
+  <span style="float:right;margin:auto 10px;">
+    <?php if (!$isLogin) : ?>
+    <?php else : ?>
+      <?=$this->Html->link('設定変更',
+        array('controller' => 'users', 'action' => 'edit')
+      )?>
+    <?php endif ;?>
+  </span>
 </div>
