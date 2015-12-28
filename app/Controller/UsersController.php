@@ -47,7 +47,31 @@ class UsersController extends AppController
 
   public function edit ()
   {
+      if ($this->request->is('post'))
+      {
+          $this->User->validate['email'] = array(
+            'validEmail' => array(
+              'rule' => array('email'),
+              'message' => 'メールアドレスを入力してください'
+            )
+          );
 
+          $this->User->set($this->data);
+          if ($this->User->validates())
+          {
+              $this->User->save($this->data);
+
+              // ログイン状態にする
+              $data = $this->User->find('first',
+                array(
+                  'conditions' => array('email' => $this->data['User']['email'])
+                )
+              );
+              $this->Auth->login($data['User']);
+              $this->Session->setFlash('設定変更に成功しました', 'default', array(), 'auth' );
+              return $this->redirect($this->Auth->redirect());
+          }
+      }
   }
 
   public function login ()

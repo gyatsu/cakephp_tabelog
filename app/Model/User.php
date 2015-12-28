@@ -19,6 +19,12 @@ class User extends AppModel
             'rule' => array('confPassword', 'passwdconf'),
             'message' => 'パスワード(確認)が一致しません'
           )
+      ),
+      "passwdold" => array(
+          'match' => array('rule' => array('oldPassword', 'passwdold'),
+              'message' => '旧パスワードが一致しません'
+          )
+
       )
   );
 
@@ -31,5 +37,13 @@ class User extends AppModel
       }
   }
 
-
+  public function oldPassword ( $field, $colum )
+  {
+      $passwdold = Authcomponent::password($field[$colum]);
+      $row = $this->findById($this->data['User']['id']);
+      if ($passwdold === $row['User']['passwd'])
+      {
+          return true;
+      }
+  }
 }
